@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 
+	namespace: 命名空间，用来区分同名的sql。
+	id: 在同一个文件里面唯一。
+	parameterType：参数类型。
+	resultType：返回的结果类型。
+	#{ename}：ename是Emp的属性（mybatis会
+	利用反射机制读取emp对象的属性值）。
+ -->
+<mapper namespace="com.tedu.cloudnote.dao.BookDao">
+	<select id="findByUserId" parameterType="string" resultType="com.tedu.cloudnote.entity.Book">
+		SELECT * FROM cn_notebook WHERE cn_user_id=#{id}
+	</select>
+	<insert id="save" parameterType="com.tedu.cloudnote.entity.Book">
+		INSERT INTO cn_notebook
+		VALUES(
+		#{cn_notebook_id},
+		#{cn_user_id},
+ 		#{cn_notebook_type_id},
+ 		#{cn_notebook_name},
+		#{cn_notebook_desc},
+ 		#{cn_notebook_createtime})
+	</insert>
+	<update id="updateBookName" parameterType="map">
+		UPDATE cn_notebook
+		SET cn_notebook_name=#{cn_notebook_name}
+		WHERE cn_notebook_id=#{cn_notebook_id}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+

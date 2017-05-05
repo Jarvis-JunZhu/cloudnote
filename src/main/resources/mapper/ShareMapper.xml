@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 
+	namespace: 命名空间，用来区分同名的sql。
+	id: 在同一个文件里面唯一。
+	parameterType：参数类型。
+	resultType：返回的结果类型。
+	#{ename}：ename是Emp的属性（mybatis会
+	利用反射机制读取emp对象的属性值）。
+ -->
+<mapper namespace="com.tedu.cloudnote.dao.ShareDao">
+	<insert id="save" parameterType="com.tedu.cloudnote.entity.Share">
+		INSERT INTO cn_share VALUES(
+		#{cn_share_id},
+		#{cn_share_title},
+		#{cn_share_body},
+		#{cn_note_id}
+		)
+	</insert>
+	<select id="findLikeTitle" parameterType="map" resultType="com.tedu.cloudnote.entity.Share">
+		SELECT * FROM cn_share WHERE cn_share_title LIKE #{keyWord}
+		LIMIT #{begin},5
+	</select>
+	<!-- 根据shareId查看分享笔记信息 -->
+	<select id="findByShareId" parameterType="string" resultType="com.tedu.cloudnote.entity.Share">
+		SELECT * FROM cn_share WHERE cn_share_id=#{shareId}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
